@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>П'ятнашки</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Гра "П'ятнашки"</h1>
+
+    <div class="settings">
+        <label>Режим гри:</label>
+        <select id="game-mode">
+            <option value="3" selected>8 (3x3)</option>
+            <option value="4">15 (4x4)</option>
+        </select>
+
+        <label>Тема:</label>
+        <select id="theme">
+            <option value="light">Світла</option>
+            <option value="dark" selected>Темна</option>
+        </select>
+
+        <button id="start-game">Почати гру</button>
+    </div>
+
+    <div class="game-board" id="game-board"></div>
+
+    <div class="stats">
+        <p>Час: <span id="time">0</span> секунд</p>
+        <p>Перестановок: <span id="moves">0</span></p>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "utf-8" />
+    <title>Canvas arcs</title>
+    <style>
+        #figure {
+            border: 1px solid navy;
+        }
+        span {
+            display: inline-block;
+            width: 100px;
+        }
+        input[type = "number"] {
+            width: 44px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id = "figure" height = "150" width = "300">
+        This browser does not support canvas
+    </canvas>
+    <br />
+    <span>Stroke style: </span><input type = "color" id = "strokeColor" value = "#6060e7" /><br />
+    <span>Fill style: </span><input type = "color" id = "fillColor" value = "#e76060" /><br />
+    <span>Border width: </span><input type = "number" id = "borderWidth" value = "4" /><br /><br />
+    <button onclick = "circle1()">Stroke circle</button>
+    <button onclick = "circle2()">Fill circle</button><br /><br />
+    from <input type = "number" step = "0.1" min = "0" value = "0.5" id = "startAngle" />&pi;
+    to   <input type = "number" step = "0.1" max = "2" value = "1.5" id = "endAngle" />&pi;
+    <label><input type = "checkbox" id = "counterclockwise" />counterclockwise</label>
+    <button onclick = "arc()">Arc</button>
+    <script>
+        function getDC() {
+            var fig = document.getElementById("figure");
+            if (fig == null) {
+                alert("Figure element not found");
+                return false;
+            }
+            if (typeof fig.getContext == "function") {
+                return fig.getContext('2d');
+            } else {
+                alert("This browser does not support canvas");
+                return false;
+            }
+        }
+        function circle1() {
+            var dc = getDC();
+            if (dc == false) return;
+            dc.clearRect(0, 0, 300, 150);
+            dc.strokeStyle = strokeColor.value;
+            dc.lineWidth = borderWidth.value;
+            dc.arc(150, 75, 50, 0, 2 * Math.PI);
+            dc.stroke();
+        }
+        function circle2() {
+            var dc = getDC();
+            if (dc == false) return;
+            dc.clearRect(0, 0, 300, 150);
+            dc.fillStyle = fillColor.value;
+            dc.arc(150, 75, 50, 0, 2 * Math.PI);
+            dc.fill();
+        }
+        function arc() {
+            var dc = getDC();
+            if (dc == false) return;
+            dc.clearRect(0, 0, 300, 150);
+            dc.strokeStyle = strokeColor.value;
+            dc.lineWidth = borderWidth.value;
+            var se = startAngle.value;
+            var ee = endAngle.value;
+            var cc = counterclockwise.checked;
+            dc.arc(150, 75, 50, se * Math.PI, ee * Math.PI, cc);
+            dc.stroke();
+        }
+    </script>
+</body>
+</html>

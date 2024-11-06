@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Піднесення до степеня з QUnit</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.18.0.css">
+</head>
+<body>
+
+<h1>Піднесення числа до степеня</h1>
+
+<div>
+    <label for="base">Число:</label>
+    <input type="number" id="base">
+</div>
+<div>
+    <label for="exponent">Степінь:</label>
+    <input type="number" id="exponent">
+</div>
+<button onclick="calculatePower()">Обчислити</button>
+<p>Результат: <span id="result"></span></p>
+
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+<script src="https://code.jquery.com/qunit/qunit-2.18.0.js"></script>
+<script>
+    function power(base, exponent) {
+        return Math.pow(base, exponent);
+    }
+
+    function calculatePower() {
+        const base = parseFloat(document.getElementById("base").value);
+        const exponent = parseFloat(document.getElementById("exponent").value);
+        const result = power(base, exponent);
+        document.getElementById("result").textContent = result;
+    }
+
+    QUnit.test("Перевірка функції power", function (assert) {
+        assert.equal(power(2, 3), 8, "2 в степені 3 має дорівнювати 8");
+        assert.equal(power(5, 0), 1, "5 в степені 0 має дорівнювати 1");
+        assert.equal(power(3, 2), 9, "3 в степені 2 має дорівнювати 9");
+        assert.equal(power(2, -2), 0.25, "2 в степені -2 має дорівнювати 0.25");
+    });
+</script>
+</body>
+</html>

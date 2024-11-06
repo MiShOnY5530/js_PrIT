@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <title>Canvas and images</title>
+</head>
+<body>
+    <canvas id = "figure" height = "150" width = "200">
+        This browser does not support canvas
+    </canvas>
+    <br />
+    <button onclick = "image1()">Image 1</button>
+    <button onclick = "image2()">Image 2</button>
+    <script>
+        function image1() {
+            var fig = figure.getContext('2d');
+            const pic = document.createElement('img');
+            pic.src = "https://schoolnavigator.com.ua/uploads/provider/logo/510/medium_Instagram-%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F_1080x1080__%D0%BF%D0%B8%D0%BA%D1%81.png";
+            fig.drawImage(pic, 0, 0, 200, 150);
+        }
+        function image2() {
+            var fig = figure.getContext('2d');
+            const pic = document.createElement('img');
+            pic.src = "https://layboard.com/images/uploads/165947/%D0%BB%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF.jpeg";
+            pic.addEventListener('load', e => {
+                fig.drawImage(pic, 0, 0, 200, 150);
+            });
+        }
+    </script>
+</body>
+</html>

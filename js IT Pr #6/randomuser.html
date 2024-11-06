@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отримання випадкових користувачів через API</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+    <h1 class="text-center mb-4">Отримання випадкових користувачів через API</h1>
+    
+    <div class="text-center">
+        <button id="getUserBtn" class="btn btn-primary btn-lg">Отримання випадкових</button>
+    </div>
+    
+    <div id="userInfo" class="mt-4 text-center"></div>
+
+    <script>
+        document.getElementById('getUserBtn').addEventListener('click', () => {
+            fetch('https://randomuser.me/api/')
+                .then(response => response.json())
+                .then(data => {
+                    const user = data.results[0];
+                    const firstName = user.name.first;
+                    const lastName = user.name.last;
+                    const email = user.email;
+
+                    console.log(`Ім'я: ${firstName}`);
+                    console.log(`Прізвище: ${lastName}`);
+                    console.log(`Електронна пошта: ${email}`);
+
+                    document.getElementById('userInfo').innerHTML = `
+                        <div class="card mx-auto" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Ім'я: ${firstName}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Прізвище: ${lastName}</h6>
+                                <p class="card-text">Електронна пошта: ${email}</p>
+                            </div>
+                        </div>
+                    `;
+                })
+                .catch(error => {
+                    console.error('Помилка:', error);
+                });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

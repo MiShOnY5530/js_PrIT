@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <title>Canvas and images</title>
+</head>
+<body>
+    <canvas id = "puc" width = "400" height = "200"></canvas>
+    <script>
+        var fig = puc.getContext('2d');
+        var gradientL = fig.createLinearGradient(0, 100, 190, 100);
+
+        gradientL.addColorStop(0.0, '#12c2e9');
+        gradientL.addColorStop(0.5, '#c471ed');
+        gradientL.addColorStop(1.0, '#f64f59');
+
+        fig.fillStyle = gradientL;
+        fig.fillRect(0,80, 190, 40);
+        
+        var gradientR = fig.createRadialGradient(300, 100, 10, 300, 100, 100);
+
+        gradientR.addColorStop(0.0, '#12c2e9');
+        gradientR.addColorStop(0.5, '#c471ed');
+        gradientR.addColorStop(1.0, '#f64f59');
+        
+        fig.fillStyle = gradientR;
+        fig.arc(300, 100, 100, 0, 2 * Math.PI);
+        fig.fill();
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Координати миші та кнопки</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #e0e0e0;
+        }
+        #trackingDiv {
+            width: 500px;
+            height: 500px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            border: 2px solid #ccc;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        #output {
+            position: absolute;
+            font-size: 24px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="trackingDiv">
+        <div id="output">Переміщайте мишу або натискайте кнопку</div>
+    </div>
+
+    <script>
+        const trackingDiv = document.getElementById('trackingDiv');
+        const output = document.getElementById('output');
+
+        trackingDiv.addEventListener('mousemove', function(event) {
+            const x = event.clientX;
+            const y = event.clientY;
+            output.innerText = `Координати: X = ${x}, Y = ${y}`;
+        });
+
+        trackingDiv.addEventListener('mousedown', function(event) {
+            const button = event.button;
+            let buttonName = '';
+
+            if (button === 0) {
+                buttonName = 'Ліва кнопка';
+            } else if (button === 2) {
+                buttonName = 'Права кнопка';
+            }
+
+            output.innerText = `${output.innerText}\nНатиснуто: ${buttonName}`;
+        });
+
+        trackingDiv.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+        });
+    </script>
+
+</body>
+</html>

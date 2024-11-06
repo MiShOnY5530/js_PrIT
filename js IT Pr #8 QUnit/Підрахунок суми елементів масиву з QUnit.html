@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Підрахунок суми елементів масиву з QUnit</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.18.0.css">
+</head>
+<body>
+
+<h1>Підрахунок суми елементів масиву</h1>
+
+<div>
+    <label for="array">Введіть елементи масиву через кому:</label>
+    <input type="text" id="array">
+</div>
+<button onclick="calculateArraySum()">Обчислити суму</button>
+<p>Сума елементів масиву: <span id="result"></span></p>
+
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+<script src="https://code.jquery.com/qunit/qunit-2.18.0.js"></script>
+<script>
+    function arraySum(arr) {
+        return arr.reduce((sum, num) => sum + num, 0);
+    }
+
+    function calculateArraySum() {
+        const input = document.getElementById("array").value;
+        const arr = input.split(",").map(Number);
+        const result = arraySum(arr);
+        document.getElementById("result").textContent = result;
+    }
+
+    QUnit.test("Перевірка функції arraySum", function (assert) {
+        assert.equal(arraySum([1, 2, 3, 4]), 10, "Сума [1, 2, 3, 4] має дорівнювати 10");
+        assert.equal(arraySum([-1, -2, -3, -4]), -10, "Сума [-1, -2, -3, -4] має дорівнювати -10");
+        assert.equal(arraySum([0, 0, 0, 0]), 0, "Сума [0, 0, 0, 0] має дорівнювати 0");
+        assert.equal(arraySum([5]), 5, "Сума [5] має дорівнювати 5");
+        assert.equal(arraySum([]), 0, "Сума порожнього масиву має дорівнювати 0");
+    });
+</script>
+</body>
+</html>

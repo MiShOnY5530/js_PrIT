@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Знаходження максимального числа в масиві з QUnit</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.18.0.css">
+</head>
+<body>
+
+<h1>Знаходження максимального числа в масиві</h1>
+
+<div>
+    <label for="array">Введіть елементи масиву через кому:</label>
+    <input type="text" id="array">
+</div>
+<button onclick="findArrayMax()">Знайти максимальне число</button>
+<p>Максимальне число в масиві: <span id="result"></span></p>
+
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+<script src="https://code.jquery.com/qunit/qunit-2.18.0.js"></script>
+<script>
+    function arrayMax(arr) {
+        return Math.max(...arr);
+    }
+
+    function findArrayMax() {
+        const input = document.getElementById("array").value;
+        const arr = input.split(",").map(Number);
+        const result = arrayMax(arr);
+        document.getElementById("result").textContent = result;
+    }
+
+    QUnit.test("Перевірка функції arrayMax", function (assert) {
+        assert.equal(arrayMax([1, 2, 3, 4]), 4, "Максимальне число в [1, 2, 3, 4] має дорівнювати 4");
+        assert.equal(arrayMax([-1, -2, -3, -4]), -1, "Максимальне число в [-1, -2, -3, -4] має дорівнювати -1");
+        assert.equal(arrayMax([5, 10, 15, 3]), 15, "Максимальне число в [5, 10, 15, 3] має дорівнювати 15");
+        assert.equal(arrayMax([7]), 7, "Максимальне число в [7] має дорівнювати 7");
+        assert.equal(arrayMax([-10, 0, 10]), 10, "Максимальне число в [-10, 0, 10] має дорівнювати 10");
+    });
+</script>
+</body>
+</html>

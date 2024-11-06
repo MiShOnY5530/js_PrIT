@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <title>Canvas and images</title>
+</head>
+<body>
+    <canvas id = "puc" width = "1000" height = "500"></canvas>
+    <script>
+        var fig = puc.getContext('2d');
+        fig.fillStyle = "#777";
+        fig.shadowColor = '#ccc';
+ 
+        fig.shadowBlur = 10;
+        fig.shadowOffsetX = 40;
+        fig.shadowOffsetY = 40;
+        fig.fillRect(20, 100, 200, 300);
+ 
+        fig.shadowBlur = 0;
+        fig.shadowOffsetX = -30;
+        fig.shadowOffsetY = -30;
+        fig.fillRect(400, 100, 200, 300);
+ 
+        fig.shadowBlur = 20;
+        fig.shadowOffsetX = -20;
+        fig.shadowOffsetY = 20;
+        fig.fillRect(700, 100, 200, 300);
+    </script>
+
+</body>
+</html>

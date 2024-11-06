@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h2>User Information</h2>
+    <p>Username: <span id="displayUsername"></span></p>
+    <p>Email: <span id="displayEmail"></span></p>
+</div>
+<script>
+    document.getElementById('displayUsername').textContent = localStorage.getItem('username');
+    document.getElementById('displayEmail').textContent = localStorage.getItem('email');
+</script>
+</body>
+</html>

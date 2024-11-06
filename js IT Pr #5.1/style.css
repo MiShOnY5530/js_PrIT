@@ -1,0 +1,24 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: #343a40;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+#userForm .btn {
+    min-width: 120px;
+}
+
+#userForm .btn-primary {
+    background-color: #007bff;
+}
+
+#userForm .btn-danger {
+    background-color: #dc3545;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Множення чисел з QUnit</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.18.0.css">
+</head>
+
+<body>
+<h1>Множення чисел</h1>
+<div>
+    <label for="num1">Число 1:</label>
+    <input type="number" id="num1">
+</div>
+<div>
+    <label for="num2">Число 2:</label>
+    <input type="number" id="num2">
+</div>
+<button onclick="multiplyNumbers()">Помножити</button>
+<p>Результат: <span id="result"></span></p>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+<script src="https://code.jquery.com/qunit/qunit-2.18.0.js"></script>
+<script>
+    function multiply(a, b) {
+        return a * b;
+    }
+    function multiplyNumbers() {
+        const num1 = parseFloat(document.getElementById("num1").value);
+        const num2 = parseFloat(document.getElementById("num2").value);
+        const result = multiply(num1, num2);
+        document.getElementById("result").textContent = result;
+    }
+    QUnit.test("Перевірка функції multiply", function (assert) {
+        assert.equal(multiply(2, 3), 6, "2 * 3 має дорівнювати 6");
+        assert.equal(multiply(0, 5), 0, "0 * 5 має дорівнювати 0");
+        assert.equal(multiply(-2, 3), -6, "-2 * 3 має дорівнювати -6");
+        assert.equal(multiply(4, -5), -20, "4 * -5 має дорівнювати -20");
+        assert.equal(multiply(3.5, 2), 7, "3.5 * 2 має дорівнювати 7");
+    });
+</script>
+</body>
+</html>

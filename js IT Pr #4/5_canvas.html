@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Canvas Bezier curves</title>
+    <style>
+        #figure {
+            border: 1px solid navy;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"] {
+             width: 44px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="figure" height="150" width="300">
+        This browser does not support canvas
+    </canvas>
+    Points:<br />
+    P1: X=<input type="number" step="1" min="0" max="300" value="10" id="x1" />,
+    Y=<input type="number" step="1" min="0" max="150" value="10" id="y1" /><br />
+    P2: X=<input type="number" step="1" min="0" max="300" value="10" id="x2" />,
+    Y=<input type="number" step="1" min="0" max="150" value="140" id="y2" /><br />
+    P3: X=<input type="number" step="1" min="0" max="300" value="280" id="x3" />,
+    Y=<input type="number" step="1" min="0" max="150" value="10" id="y3" /><br />
+    P4: X=<input type="number" step="1" min="0" max="300" value="280" id="x4" />,
+    Y=<input type="number" step="1" min="0" max="150" value="140" id="y4" /><br />
+    <script>
+        function getDC() {
+            var fig = document.getElementById("figure");
+            if (fig == null) {
+                alert("Figure element not found");
+                return false;
+            }
+            if (typeof fig.getContext == "function") {
+                return fig.getContext('2d');
+            } else {
+                alert("This browser does not support canvas");
+                return false;
+            }
+        }
+        function showPoints() {
+            var dc = getDC();
+            if (dc == false) return;
+            dc.clearRect(0, 0, 300, 150);
+            dc.fillStyle = "tomato";
+            dc.beginPath();
+            dc.arc(x1.value, y1.value, 5, 0, 2 * Math.PI);
+            dc.fill();
+            dc.beginPath();
+            dc.arc(x4.value, y4.value, 5, 0, 2 * Math.PI);
+            dc.fill();
+            dc.fillStyle = "lime";
+            dc.beginPath();
+            dc.arc(x2.value, y2.value, 5, 0, 2 * Math.PI);
+            dc.fill();
+            dc.beginPath();
+            dc.arc(x3.value, y3.value, 5, 0, 2 * Math.PI);
+            dc.fill();
+            dc.beginPath();
+            dc.moveTo(x1.value, y1.value);
+            dc.setLineDash([5, 15]);
+            dc.lineTo(x2.value, y2.value);
+            dc.lineTo(x4.value, y4.value);
+            dc.lineTo(x3.value, y3.value);
+            dc.lineTo(x1.value, y1.value);
+            dc.strokeStyle = "tomato";
+            dc.stroke();
+            dc.setLineDash([]);
+        }
+        function drawCurve() {
+            var dc = getDC();
+            if (dc == false) return;
+            dc.beginPath();
+            dc.moveTo(x1.value, y1.value);
+            dc.bezierCurveTo(x2.value, y2.value, x3.value, y3.value, x4.value, y4.value);
+            dc.strokeStyle = "navy";
+            dc.stroke();
+        }
+        for (let inp of document.querySelectorAll("input[type='number']"))
+             inp.onchange = () => { showPoints(); drawCurve() }
+        showPoints()
+        drawCurve()
+    </script>
+</body>
+</html>

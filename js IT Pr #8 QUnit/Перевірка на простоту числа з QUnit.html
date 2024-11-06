@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перевірка на простоту числа з QUnit</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.18.0.css">
+</head>
+<body>
+
+<h1>Перевірка на простоту числа</h1>
+
+<div>
+    <label for="number">Введіть число:</label>
+    <input type="number" id="number">
+</div>
+<button onclick="checkPrime()">Перевірити</button>
+<p>Результат: <span id="result"></span></p>
+
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+<script src="https://code.jquery.com/qunit/qunit-2.18.0.js"></script>
+<script>
+    function isPrime(num) {
+        if (num <= 1) return false;
+        if (num <= 3) return true;
+        if (num % 2 === 0 || num % 3 === 0) return false;
+
+        for (let i = 5; i * i <= num; i += 6) {
+            if (num % i === 0 || num % (i + 2) === 0) return false;
+        }
+        return true;
+    }
+
+    function checkPrime() {
+        const number = parseInt(document.getElementById("number").value, 10);
+        const result = isPrime(number);
+        document.getElementById("result").textContent = result ? "Це просте число!" : "Це не просте число!";
+    }
+
+    QUnit.test("Перевірка функції isPrime", function (assert) {
+        assert.ok(isPrime(2), "2 є простим числом");
+        assert.ok(isPrime(3), "3 є простим числом");
+        assert.notOk(isPrime(4), "4 не є простим числом");
+        assert.ok(isPrime(5), "5 є простим числом");
+        assert.notOk(isPrime(1), "1 не є простим числом");
+        assert.notOk(isPrime(0), "0 не є простим числом");
+        assert.notOk(isPrime(-7), "-7 не є простим числом");
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizza Builder</title>
+</head>
+<body>
+<h1>Pizza Builder</h1>
+<form id="pizzaForm">
+  <label for="size"><b>Розмір:</b></label>
+  <select id="size">
+    <option value="Маленька">Маленька</option>
+    <option value="Середня">Середня</option>
+    <option value="Велика">Велика</option>
+  </select>
+
+
+  <label for="dough"><b>Тип тіста:</b></label>
+  <select id="dough">
+    <option value="Тонке">Тонке</option>
+    <option value="Товсте">Товсте</option>
+    <option value="Начинене">Начинене</option>
+  </select>
+
+  <label for="sauce"><b>Соус:</b></label>
+  <select id="sauce">
+    <option value="Томатний">Томатний</option>
+    <option value="BBQ">BBQ</option>
+    <option value="Песто">Песто</option>
+  </select>
+
+  <label for="toppings"><b>Інгредієнти:</b></label>
+  <select id="toppings" multiple>
+    <option value="Сир">Сир</option>
+    <option value="Пепероні">Пепероні</option>
+    <option value="Гриби">Гриби</option>
+    <option value="Оливки">Оливки</option>
+    <option value="Перець">Перець</option>
+  </select>
+
+  <button type="button" id="createPizza">Створити піцу</button>
+</form>
+
+<h2>Ваші піци:</h2>
+<div id="pizzas"></div>
+
+<script src="pizzaBuilder.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "utf-8" />
+    <title>Canvas rectangles</title>
+    <style>
+        #figure {
+            border: 1px solid navy;
+        }
+        span {
+            display: inline-block;
+            width: 100px;
+        }
+        input[type="number"] {
+            width: 44px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="figure" height="150" width="300">
+        This browser does not support canvas
+    </canvas>
+    <br />
+    <span> Stroke style: </span><input type = "color" id = "strokeColor" value = "#6060e7" /><br />
+    <span> Fill style: </span><input type = "color" id = "fillColor" value = "#e76060" /><br />
+    <span> Border width: </span><input type = "number" id = "borderWidth" value = "4" /><br /><br />
+    <button onclick = "rectangle1()"> Stroke rectangle </button>
+    <button onclick = "rectangle2()"> Fill rectangle </button>
+    <button onclick = "rectangle3()"> Stroke and fill </button>
+    <script>
+        function getDC() {
+            var fig = document.getElementById("figure");
+            if (fig == null) {
+                alert("Figure element not found");
+                return false;
+            }
+            if (typeof fig.getContext == "function") {
+                return fig.getContext('2d');
+            } else {
+                alert("This browser does not support canvas");
+                return false;
+            }
+        }
+        function rectangle1() {
+            var dc = getDC();
+            if (dc == false) return;
+            dc.clearRect(0, 0, 300, 150);
+            dc.strokeStyle = strokeColor.value;
+            dc.lineWidth = borderWidth.value;
+            dc.rect(100, 50, 100, 50);
+            dc.stroke();
+        }
+        function rectangle2() {
+            var dc = getDC();
+            if (dc == false) return;
+            dc.clearRect(0, 0, 300, 150);
+            dc.fillStyle = fillColor.value;
+            dc.rect(100, 50, 100, 50);
+            dc.fill();
+        }
+        function rectangle3() {
+            var dc = getDC();
+            if (dc == false) return;
+            dc.clearRect(0, 0, 300, 150);
+            dc.strokeStyle = strokeColor.value;
+            dc.fillStyle = fillColor.value;
+            dc.lineWidth = borderWidth.value;
+            dc.rect(100, 50, 100, 50);
+            dc.fill();
+            dc.stroke();
+        }
+    </script>
+</body>
+</html>

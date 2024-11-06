@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  у місті</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-mQ93nXF/5AmMRaA3QK4jrZXjKpT8MZ5h7rLCGdIhgIp9sSTmMEqzl95lG5ALYs6e" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #weatherResult {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="mb-4">Погода у місті</h1>
+        <div class="input-group mb-3">
+            <input type="text" id="cityInput" class="form-control" placeholder="Введіть назву міста">
+            <button id="getWeatherBtn" class="btn btn-primary">Отримати погоду</button>
+        </div>
+        <div id="weatherResult"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-qE/56XshHRSMf5gYjPeA1m/EO82hfpBoKpGzye5pKclltfmf79ZYYOq0q/FawfvI" crossorigin="anonymous"></script>
+
+    <script>
+        document.getElementById('getWeatherBtn').addEventListener('click', function() {
+            const city = document.getElementById('cityInput').value;
+            fetchWeather(city);
+        });
+
+        async function fetchWeather(city) {
+            const apiKey = 'e4dd52420b79c3f210a97d607b1495fa'; 
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=ua`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.cod === 200) {
+                    const temperature = data.main.temp;
+                    const description = data.weather[0].description;
+
+                    document.getElementById('weatherResult').innerHTML = `
+                        <h2>${city.charAt(0).toUpperCase() + city.slice(1)}</h2>
+                        <p>Температура: ${temperature}°C</p>
+                        <p>Опис погоди: ${description}</p>
+                    `;
+                } else {
+                    document.getElementById('weatherResult').innerHTML = `<p>${data.message}</p>`;
+                }
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+                document.getElementById('weatherResult').innerHTML = `
+                    <p>Не вдалося отримати дані про погоду. Спробуйте ще раз.</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

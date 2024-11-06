@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перевірка на паліндром з QUnit</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.18.0.css">
+</head>
+<body>
+
+<h1>Перевірка на паліндром</h1>
+
+<div>
+    <label for="text">Введіть текст:</label>
+    <input type="text" id="text">
+</div>
+<button onclick="checkPalindrome()">Перевірити</button>
+<p>Результат: <span id="result"></span></p>
+
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+<script src="https://code.jquery.com/qunit/qunit-2.18.0.js"></script>
+<script>
+    function isPalindrome(text) {
+        const normalizedText = text.toLowerCase().replace(/[^a-zа-я0-9]/g, '');
+        const reversedText = normalizedText.split('').reverse().join('');
+        return normalizedText === reversedText;
+    }
+
+    function checkPalindrome() {
+        const text = document.getElementById("text").value;
+        const result = isPalindrome(text);
+        document.getElementById("result").textContent = result ? "Це паліндром!" : "Це не паліндром!";
+    }
+
+    QUnit.test("Перевірка функції isPalindrome", function (assert) {
+        assert.ok(isPalindrome("madam"), "'madam' є паліндромом");
+        assert.notOk(isPalindrome("hello"), "'hello' не є паліндромом");
+        assert.ok(isPalindrome("АББА"), "'АББА' є паліндромом");
+    });
+</script>
+</body>
+</html>

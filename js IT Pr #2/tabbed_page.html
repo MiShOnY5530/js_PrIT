@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сторінка з вкладками</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .tabs {
+            width: 200px;
+            background-color: #333;
+            display: flex;
+            flex-direction: column;
+        }
+        .tabs button {
+            background-color: inherit;
+            color: white;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .tabs button:hover {
+            background-color: #575757;
+        }
+        .tabs button.active {
+            background-color: #575757;
+        }
+        .tabcontent {
+            flex-grow: 1;
+            padding: 20px;
+            display: none;
+        }
+        .tabcontent.active {
+            display: block;
+            background-color: white;
+            border-left: 2px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tabs">
+        <button class="tablinks" onclick="openTab(event, 'Tab1')">HTML</button>
+        <button class="tablinks" onclick="openTab(event, 'Tab2')">CSS</button>
+        <button class="tablinks" onclick="openTab(event, 'Tab3')">JS</button>
+    </div>
+
+    <div id="Tab1" class="tabcontent">
+        <h2>HTML (англ. HyperText Markup Language — мова розмітки гіпертексту)</h2>
+        <p>Cтандартизована мова розмітки документів для перегляду вебсторінок у браузері. Браузери отримують HTML документ від сервера за протоколами HTTP/HTTPS або відкривають з локального диска, далі інтерпретують код в інтерфейс, який відображатиметься на екрані монітора.</p>
+    </div>
+
+    <div id="Tab2" class="tabcontent">
+        <h2>CSS (англ. Cascading Style Sheets, укр. Каскадні таблиці стилів)</h2>
+        <p>Це спеціальна мова стилю сторінок, що використовується для опису їхнього зовнішнього вигляду. Самі ж сторінки написані мовами розмітки даних.</p>
+    </div>
+
+    <div id="Tab3" class="tabcontent">
+        <h2>JavaScript (JS)</h2>
+        <p>Динамічна, об'єктно-орієнтована прототипна мова програмування. Реалізація стандарту ECMAScript. Найчастіше використовується для створення сценаріїв вебсторінок, що надає можливість на боці клієнта (пристрої кінцевого користувача) взаємодіяти з користувачем, керувати браузером, асинхронно обмінюватися даними з сервером, змінювати структуру та зовнішній вигляд вебсторінки.</p>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector('.tablinks').click();
+        });
+    </script>
+
+</body>
+</html>
